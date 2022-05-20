@@ -19,13 +19,13 @@ var (
 func init() {
 	switch "" {
 	case appHost:
-		appHost = "127.0.0.1"
+		appHost = "0.0.0.0"
 		fallthrough
 	case appPort:
 		appPort = "8080"
 		fallthrough
 	case dbHost:
-		dbHost = "127.0.0.1"
+		dbHost = "host.docker.internal"
 		fallthrough
 	case dbPort:
 		dbPort = "3306"
@@ -37,7 +37,7 @@ func init() {
 		dbPassword = "root"
 		fallthrough
 	case dbName:
-		dbName = "test"
+		dbName = "mars"
 	}
 
 	dbConnStr = fmt.Sprintf(dbConnStr, dbUsername, dbPassword, dbHost, dbPort, dbName)

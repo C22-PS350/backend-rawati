@@ -9,11 +9,14 @@ build:
 fmt:
 	@go.exe fmt ./...
 
-test:
-	@go.exe test -v ./...
-
 db-up:
 	@docker-compose up -d db
 
-clean:
-	@docker-compose down
+db-reset:
+	mysql -h 127.0.0.1 -u root -proot -D mars < ./scripts/sql/a.sql
+
+test-up:
+	@docker-compose -f ./tests/docker-compose.yml up -d
+
+test-clean:
+	@docker-compose -f ./tests/docker-compose.yml down

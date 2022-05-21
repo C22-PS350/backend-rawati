@@ -17,26 +17,25 @@ var (
 )
 
 func init() {
-	switch "" {
-	case appHost:
+	if appHost == "" {
 		appHost = "0.0.0.0"
-		fallthrough
-	case appPort:
+	}
+	if appPort == "" {
 		appPort = "8080"
-		fallthrough
-	case dbHost:
-		dbHost = "localhost"
-		fallthrough
-	case dbPort:
+	}
+	if dbHost == "" {
+		dbHost = "127.0.0.1"
+	}
+	if dbPort == "" {
 		dbPort = "3306"
-		fallthrough
-	case dbUsername:
+	}
+	if dbUsername == "" {
 		dbUsername = "root"
-		fallthrough
-	case dbPassword:
+	}
+	if dbPassword == "" {
 		dbPassword = "root"
-		fallthrough
-	case dbName:
+	}
+	if dbName == "" {
 		dbName = "mars"
 	}
 

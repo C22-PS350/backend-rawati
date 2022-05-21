@@ -25,7 +25,7 @@ func init() {
 		appPort = "8080"
 		fallthrough
 	case dbHost:
-		dbHost = "host.docker.internal"
+		dbHost = "localhost"
 		fallthrough
 	case dbPort:
 		dbPort = "3306"

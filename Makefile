@@ -12,6 +12,9 @@ fmt:
 db-up:
 	@docker-compose up -d db
 
+db-stop:
+	@docker-compose stop db
+
 db-reset:
 	mysql -h 127.0.0.1 -u root -proot -D mars < ./scripts/sql/a.sql
 

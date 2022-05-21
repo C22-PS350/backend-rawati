@@ -15,8 +15,11 @@ db-up:
 db-reset:
 	mysql -h 127.0.0.1 -u root -proot -D mars < ./scripts/sql/a.sql
 
-test-up:
+test-prepare:
 	@docker-compose -f ./tests/docker-compose.yml up -d
+
+test-start:
+	go test -v ./...
 
 test-clean:
 	@docker-compose -f ./tests/docker-compose.yml down

@@ -17,12 +17,11 @@ jobs:
       with:
         go-version: 1.17
 
-    - name: Test
-      run: make test-up
+    - name: Prepare test
+      run: make test-prepare
 
-    - name: Showing test result
-      if: always()
-      run: docker logs app_test
+    - name: Test
+      run: make test-start
 
     - name: Clean test
       if: always()

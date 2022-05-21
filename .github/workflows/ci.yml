@@ -19,7 +19,11 @@ jobs:
 
     - name: Test
       run: make test-up
-      
+
+    - name: Showing test result
+      if: always()
+      run: docker logs app_test
+
     - name: Clean test
       if: always()
       run: make test-clean

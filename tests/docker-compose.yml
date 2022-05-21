@@ -1,6 +1,7 @@
 version: "3.9"
 services:
   app:
+    container_name: app_test
     build:
       context: ..
       dockerfile: ./tests/Dockerfile.test

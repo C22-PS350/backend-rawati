@@ -14,9 +14,15 @@ func (h *Handler) CreateUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if req.Name == "" || req.Password == "" {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
 	if err := h.DB.Create(&req).Error; err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
+
 	w.WriteHeader(http.StatusOK)
 }

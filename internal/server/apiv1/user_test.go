@@ -8,7 +8,8 @@ import (
 )
 
 func TestCreateUser(t *testing.T) {
-	p := strings.NewReader(`{"name": "farryl", "password": "farryl"}`)
+	p1 := strings.NewReader(`{"name": "farryl", "password": "azmi"}`)
+	p2 := strings.NewReader(`{"name": "farryl"}`)
 
 	tests := []struct {
 		Name    string
@@ -18,7 +19,7 @@ func TestCreateUser(t *testing.T) {
 	}{
 		{
 			Name:    "Success",
-			Req:     httptest.NewRequest(http.MethodPost, "/api/v1/users", p),
+			Req:     httptest.NewRequest(http.MethodPost, "/api/v1/users", p1),
 			Res:     httptest.NewRecorder(),
 			ExpCode: http.StatusOK,
 		},
@@ -28,13 +29,19 @@ func TestCreateUser(t *testing.T) {
 			Res:     httptest.NewRecorder(),
 			ExpCode: http.StatusInternalServerError,
 		},
+		{
+			Name:    "Bad Request",
+			Req:     httptest.NewRequest(http.MethodPost, "/api/v1/users", p2),
+			Res:     httptest.NewRecorder(),
+			ExpCode: http.StatusBadRequest,
+		},
 	}
 
 	for _, test := range tests {
 		t.Run(test.Name, func(t *testing.T) {
 			h.CreateUser(test.Res, test.Req)
 			if test.Res.Code != test.ExpCode {
-				t.Fail()
+				t.Errorf("expected code is %v, but got %v\n", test.ExpCode, test.Res.Code)
 			}
 		})
 	}

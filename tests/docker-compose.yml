@@ -6,6 +6,9 @@ services:
       dockerfile: ./tests/Dockerfile.test
     environment:
       - DB_HOST=db_test
+      - DB_PORT=3306
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
       - DB_NAME=mars_test
     depends_on:
       db:

@@ -1,4 +1,4 @@
-MAIN := github.com/farryl/project-mars/cmd/mars
+MAIN := github.com/C22-PS350/backend-rawati/cmd/mars
 
 run:
 	@go.exe run ${MAIN}

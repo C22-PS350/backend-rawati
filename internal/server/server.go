@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/farryl/project-mars/internal/server/apiv1"
+	"github.com/C22-PS350/backend-rawati/internal/server/apiv1"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/cors"

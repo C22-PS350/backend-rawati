@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/farryl/project-mars/internal/server"
+	"github.com/C22-PS350/backend-rawati/internal/server"
 )
 
 func main() {

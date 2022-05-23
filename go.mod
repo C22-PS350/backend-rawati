@@ -1,4 +1,4 @@
-module github.com/farryl/project-mars
+module github.com/C22-PS350/backend-rawati
 
 go 1.17
 

@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/farryl/project-mars/internal/models"
+	"github.com/C22-PS350/backend-rawati/internal/models"
 )
 
 func (h *Handler) CreateUser(w http.ResponseWriter, r *http.Request) {

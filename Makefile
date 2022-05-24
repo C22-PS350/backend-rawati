@@ -1,10 +1,10 @@
-MAIN := github.com/C22-PS350/backend-rawati/cmd/mars
+MAIN := github.com/C22-PS350/backend-rawati/cmd/rawati
 
 run:
 	@go.exe run ${MAIN}
 
 build:
-	@go.exe build -o build/mars ${MAIN}
+	@go.exe build -o build/rawati ${MAIN}
 
 fmt:
 	go fmt ./...
@@ -16,10 +16,10 @@ db-stop:
 	@docker-compose stop db
 
 db-reset:
-	mysql -h 127.0.0.1 -u root -proot -D mars < ./scripts/sql/a.sql
+	mysql -h 127.0.0.1 -u root -proot -D rawati < ./scripts/sql/a.sql
 
 docs:
-	@swag init --dir cmd/mars --output docs --ot "go,json" --parseDepth 10 --parseDependency
+	@swag init --dir cmd/rawati --output docs --ot "go,json" --parseDepth 10 --parseDependency
 
 docs-fmt:
 	swag fmt

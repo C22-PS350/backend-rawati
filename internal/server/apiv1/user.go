@@ -7,7 +7,7 @@ import (
 	"net/http"
 
 	"github.com/C22-PS350/backend-rawati/internal/models"
-	"github.com/C22-PS350/backend-rawati/internal/util"
+	"github.com/C22-PS350/backend-rawati/internal/utils"
 )
 
 // @Summary      create user
@@ -22,19 +22,19 @@ import (
 func (h *Handler) CreateUser(w http.ResponseWriter, r *http.Request) {
 	var req models.UserRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		util.RespondErr(w, http.StatusInternalServerError, fmt.Errorf("error decoding request: %s", err))
+		utils.RespondErr(w, http.StatusInternalServerError, fmt.Errorf("error decoding request: %s", err))
 		return
 	}
 
 	if req.Name == "" || req.Password == "" {
-		util.RespondErr(w, http.StatusBadRequest, errors.New("name or password can't be empty"))
+		utils.RespondErr(w, http.StatusBadRequest, errors.New("name or password can't be empty"))
 		return
 	}
 
-	if err := h.DB.Create(&req).Error; err != nil {
-		util.RespondErr(w, http.StatusInternalServerError, fmt.Errorf("error inserting data: %s", err))
+	if err := h.DB.Table("users").Create(&req).Error; err != nil {
+		utils.RespondErr(w, http.StatusInternalServerError, fmt.Errorf("error inserting data: %s", err))
 		return
 	}
 
-	util.RespondOK(w, &req)
+	utils.RespondOK(w, &req)
 }

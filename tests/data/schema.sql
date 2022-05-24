@@ -1,4 +1,4 @@
-USE mars_test;
+USE rawati_test;
 
 CREATE TABLE users (
     user_id INT PRIMARY KEY AUTO_INCREMENT,

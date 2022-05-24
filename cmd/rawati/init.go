@@ -36,7 +36,7 @@ func init() {
 		dbPassword = "root"
 	}
 	if dbName == "" {
-		dbName = "mars"
+		dbName = "rawati"
 	}
 
 	dbConnStr = fmt.Sprintf(dbConnStr, dbUsername, dbPassword, dbHost, dbPort, dbName)

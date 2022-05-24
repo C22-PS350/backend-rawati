@@ -8,7 +8,7 @@ RUN go mod download
 
 COPY . .
 
-RUN go build -o build/mars ./cmd/mars/
+RUN go build -o build/rawati ./cmd/rawati/
 
-CMD [ "./build/mars" ]
+CMD [ "./build/rawati" ]
 

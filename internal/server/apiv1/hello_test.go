@@ -25,7 +25,7 @@ func TestHello(t *testing.T) {
 		t.Run(test.Name, func(t *testing.T) {
 			h.Hello(test.Res, test.Req)
 			if test.Res.Code != test.ExpCode {
-				t.Fail()
+				t.Errorf("expected code is %v, but got %v\n", test.ExpCode, test.Res.Code)
 			}
 		})
 	}

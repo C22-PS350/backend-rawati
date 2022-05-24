@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 )
 
 type JsonOK struct {
@@ -19,20 +20,11 @@ type errContent struct {
 	Message string `json:"error"`
 }
 
-func WriteToResponse(w http.ResponseWriter, code int, body interface{}) {
-	w.WriteHeader(code)
-	w.Header().Set("Content-Type", "application/json")
-	err := json.NewEncoder(w).Encode(body)
-	if err != nil {
-		panic(fmt.Sprintf("error encode json response: %s", err))
-	}
-}
-
 func RespondOK(w http.ResponseWriter, payload interface{}) {
 	d := JsonOK{
 		Data: payload,
 	}
-	WriteToResponse(w, http.StatusOK, d)
+	writeToResponse(w, http.StatusOK, d)
 }
 
 func RespondErr(w http.ResponseWriter, code int, err error) {
@@ -44,9 +36,18 @@ func RespondErr(w http.ResponseWriter, code int, err error) {
 	d := JsonErr{
 		Error: e,
 	}
-	WriteToResponse(w, code, d)
+	writeToResponse(w, code, d)
 
 	if code == http.StatusInternalServerError {
-		fmt.Fprintf(w, "internal server error: %s\n", err)
+		fmt.Fprintf(os.Stderr, "internal server error: %s\n", err)
+	}
+}
+
+func writeToResponse(w http.ResponseWriter, code int, body interface{}) {
+	w.WriteHeader(code)
+	w.Header().Set("Content-Type", "application/json")
+	err := json.NewEncoder(w).Encode(body)
+	if err != nil {
+		panic(fmt.Sprintf("error encode json response: %s", err))
 	}
 }

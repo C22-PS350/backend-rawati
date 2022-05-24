@@ -21,7 +21,9 @@ jobs:
       run: make test-prepare
 
     - name: Test
-      run: make test-start
+      run: |
+        sleep 10
+        make test-start
 
     - name: Clean test
       if: always()

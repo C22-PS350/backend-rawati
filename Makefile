@@ -7,7 +7,7 @@ build:
 	@go.exe build -o build/mars ${MAIN}
 
 fmt:
-	@go.exe fmt ./...
+	go fmt ./...
 
 db-up:
 	@docker-compose up -d db
@@ -17,6 +17,15 @@ db-stop:
 
 db-reset:
 	mysql -h 127.0.0.1 -u root -proot -D mars < ./scripts/sql/a.sql
+
+docs:
+	@swag init --dir cmd/mars --output docs --ot "go,json" --parseDepth 10 --parseDependency
+
+docs-fmt:
+	swag fmt
+
+docs-read:
+	@docker compose up -d docs
 
 test-prepare:
 	@docker-compose -f ./tests/docker-compose.yml up -d

@@ -6,6 +6,14 @@ import (
 	"github.com/C22-PS350/backend-rawati/internal/server"
 )
 
+// @title                         Rawati API
+// @version                       1.0
+// @description                   Rawati API
+// @host                          localhost:8080
+// @BasePath                      /api/v1
+// @securityDefinitions.apiToken  ApiToken
+// @in                            header
+// @name                          Authorization
 func main() {
 	srvcfg := server.Config{
 		AppHost:      appHost,

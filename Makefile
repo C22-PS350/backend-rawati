@@ -9,6 +9,9 @@ build:
 fmt:
 	go fmt ./...
 
+swag-fmt:
+	swag fmt
+
 db-up:
 	@docker-compose up -d db
 
@@ -20,9 +23,6 @@ db-reset:
 
 docs:
 	@swag init --dir cmd/rawati --output docs --ot "go,json" --parseDepth 10 --parseDependency
-
-docs-fmt:
-	swag fmt
 
 docs-read:
 	@docker compose up -d docs

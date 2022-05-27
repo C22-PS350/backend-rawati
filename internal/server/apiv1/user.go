@@ -15,9 +15,9 @@ import (
 // @Accept       json
 // @Param        payload  body  models.UserRequest  true  "request body"
 // @Produce      json
-// @Success      200  {object}  util.JsonOK{data=models.UserResponse}
-// @Failure      400  {object}  util.JsonErr
-// @Failure      500  {object}  util.JsonErr
+// @Success      200  {object}  utils.JsonOK{data=models.UserResponse}
+// @Failure      400  {object}  utils.JsonErr
+// @Failure      500  {object}  utils.JsonErr
 // @Router       /users [post]
 func (h *Handler) CreateUser(w http.ResponseWriter, r *http.Request) {
 	var req models.UserRequest

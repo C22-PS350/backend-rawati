@@ -21,11 +21,11 @@ db-stop:
 db-reset:
 	mysql -h 127.0.0.1 -u root -proot -D rawati < ./scripts/sql/a.sql
 
-docs:
+docs-gen:
 	@swag init --dir cmd/rawati --output docs --ot "go,json" --parseDepth 10 --parseDependency
 
 docs-read:
-	@docker compose up -d docs
+	@docker-compose up -d --build docs
 
 test-prepare:
 	@docker-compose -f ./tests/docker-compose.yml up -d

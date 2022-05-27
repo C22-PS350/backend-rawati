@@ -8,7 +8,7 @@ import (
 
 // @title                         Rawati API
 // @version                       1.0
-// @description                   Rawati API
+// @description                   Still in development process. Updated regularly.
 // @host                          localhost:8080
 // @BasePath                      /api/v1
 // @securityDefinitions.apiToken  ApiToken

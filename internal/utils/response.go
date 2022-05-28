@@ -17,7 +17,7 @@ type JsonErr struct {
 
 type errContent struct {
 	Code    int    `json:"code"`
-	Message string `json:"error"`
+	Message string `json:"message"`
 }
 
 func RespondOK(w http.ResponseWriter, payload interface{}) {
@@ -33,14 +33,15 @@ func RespondErr(w http.ResponseWriter, code int, err error) {
 		Message: err.Error(),
 	}
 
+	if code == http.StatusInternalServerError {
+		fmt.Fprintf(os.Stderr, "internal server error: %s\n", err)
+		e.Message = "server error: something went wrong"
+	}
+
 	d := JsonErr{
 		Error: e,
 	}
 	writeToResponse(w, code, d)
-
-	if code == http.StatusInternalServerError {
-		fmt.Fprintf(os.Stderr, "internal server error: %s\n", err)
-	}
 }
 
 func writeToResponse(w http.ResponseWriter, code int, body interface{}) {

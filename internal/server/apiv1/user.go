@@ -13,20 +13,20 @@ import (
 // @Summary      create user
 // @Description  create a user account
 // @Accept       json
-// @Param        payload  body  models.UserRequest  true  "request body"
+// @Param        payload  body  models.User  true  "request body"
 // @Produce      json
 // @Success      200  {object}  utils.JsonOK{data=models.UserResponse}
 // @Failure      400  {object}  utils.JsonErr
 // @Failure      500  {object}  utils.JsonErr
 // @Router       /users [post]
 func (h *Handler) CreateUser(w http.ResponseWriter, r *http.Request) {
-	var req models.UserRequest
+	var req models.User
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		utils.RespondErr(w, http.StatusInternalServerError, fmt.Errorf("error decoding request: %s", err))
 		return
 	}
 
-	if req.Name == "" || req.Password == "" {
+	if req.Name == nil || req.Password == nil {
 		utils.RespondErr(w, http.StatusBadRequest, errors.New("name or password can't be empty"))
 		return
 	}

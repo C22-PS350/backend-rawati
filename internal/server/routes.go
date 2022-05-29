@@ -7,8 +7,8 @@ import (
 
 func setupRoutes(r *chi.Mux, h *apiv1.Handler) {
 	r.Route("/api/v1", func(r chi.Router) {
-		r.Get("/hello", h.Hello)
-		r.Post("/users", h.CreateUser)
+		r.Post("/auth/register", h.Register)
+		r.Post("/auth/login", h.Login)
 
 		// r.Group(func(r chi.Router) {
 		// 	r.Use(h.AuthMiddleware)

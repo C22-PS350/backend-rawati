@@ -4,11 +4,13 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/C22-PS350/backend-rawati/internal/server/apiv1"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/cors"
+	"github.com/patrickmn/go-cache"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -57,8 +59,11 @@ func (srv *Server) createHandler() (*apiv1.Handler, error) {
 		return nil, err
 	}
 
+	c := cache.New(20*time.Minute, 10*time.Minute)
+
 	handler := &apiv1.Handler{
 		DB: db,
+		C:  c,
 	}
 
 	return handler, nil

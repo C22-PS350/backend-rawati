@@ -18,6 +18,7 @@ type RegisterUserToken struct {
 
 type RegisterResponse struct {
 	UserID uint32 `json:"user_id"`
+	Token  string `json:"token"`
 }
 
 type RegisterTest1 struct {

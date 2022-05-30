@@ -48,17 +48,16 @@ func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
 
 	hashedPwdStr := string(hashedPwd)
 	req.Password = &hashedPwdStr
+
+	var userToken models.RegisterUserToken
 	if err := h.DB.Transaction(func(tx *gorm.DB) error {
 		if err := tx.Table("users").Create(&req).Error; err != nil {
 			return err
 		}
 
-		userToken := models.RegisterUserToken{
-			UserID:    req.UserID,
-			Token:     generateToken(20),
-			CreatedAt: time.Now(),
-		}
-
+		userToken.UserID = req.UserID
+		userToken.Token = generateToken(20)
+		userToken.CreatedAt = time.Now()
 		if err := tx.Table("user_token").Create(&userToken).Error; err != nil {
 			return err
 		}
@@ -74,7 +73,7 @@ func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	resp := models.RegisterResponse{UserID: req.UserID}
+	resp := models.RegisterResponse{UserID: req.UserID, Token: userToken.Token}
 	utils.RespondOK(w, &resp)
 }
 

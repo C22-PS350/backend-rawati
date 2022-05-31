@@ -14,7 +14,7 @@ import (
 )
 
 func TestLogin(t *testing.T) {
-	userData, plainPwd, err := h.PrepTestLogin()
+	userData, plainPwd, err := h.prepTestLogin()
 	if err != nil {
 		t.Fatalf("test login prep error: %s", err)
 	}
@@ -49,6 +49,7 @@ func TestLogin(t *testing.T) {
 		t.Fatalf("test login prep error: %s", err)
 	}
 
+	endpoint := "/api/v1/auth/login"
 	tests := []struct {
 		Name    string
 		Req     *http.Request
@@ -57,19 +58,19 @@ func TestLogin(t *testing.T) {
 	}{
 		{
 			Name:    "Success",
-			Req:     httptest.NewRequest(http.MethodPost, "/api/v1/auth/login", &b1),
+			Req:     httptest.NewRequest(http.MethodPost, endpoint, &b1),
 			Res:     httptest.NewRecorder(),
 			ExpCode: http.StatusOK,
 		},
 		{
 			Name:    "WrongUsername",
-			Req:     httptest.NewRequest(http.MethodPost, "/api/v1/auth/login", &b2),
+			Req:     httptest.NewRequest(http.MethodPost, endpoint, &b2),
 			Res:     httptest.NewRecorder(),
 			ExpCode: http.StatusBadRequest,
 		},
 		{
 			Name:    "WrongPassword",
-			Req:     httptest.NewRequest(http.MethodPost, "/api/v1/auth/login", &b3),
+			Req:     httptest.NewRequest(http.MethodPost, endpoint, &b3),
 			Res:     httptest.NewRecorder(),
 			ExpCode: http.StatusBadRequest,
 		},
@@ -79,6 +80,7 @@ func TestLogin(t *testing.T) {
 		t.Run(test.Name, func(t *testing.T) {
 			h.Login(test.Res, test.Req)
 			if test.Res.Code != test.ExpCode {
+				t.Errorf("%s error response: %s", test.Name, test.Res.Body.String())
 				t.Errorf("expected code is %v, but got %v\n", test.ExpCode, test.Res.Code)
 			}
 		})
@@ -86,13 +88,13 @@ func TestLogin(t *testing.T) {
 
 }
 
-func (h *Handler) PrepTestLogin() (*models.LoginTest1, string, error) {
+func (h *Handler) prepTestLogin() (*models.LoginTest1, string, error) {
 	var l1 models.LoginTest1
-	var l2 models.LoginTest2
 	if err := faker.FakeData(&l1); err != nil {
 		return nil, "", err
 	}
 
+	var l2 models.LoginTest2
 	l2.UserID = l1.UserID
 	l2.CreatedAt = time.Now()
 	if err := faker.FakeData(&l2); err != nil {

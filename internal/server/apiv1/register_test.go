@@ -12,9 +12,9 @@ import (
 )
 
 func TestRegister(t *testing.T) {
-	userData, err := h.PrepTestRegister()
+	userData, err := h.prepTestRegister()
 	if err != nil {
-		t.Fatalf("test login prep error: %s", err)
+		t.Fatalf("test register prep error: %s", err)
 	}
 
 	p1 := models.RegisterRequest{
@@ -26,7 +26,7 @@ func TestRegister(t *testing.T) {
 
 	b1 := bytes.Buffer{}
 	if err := json.NewEncoder(&b1).Encode(&p1); err != nil {
-		t.Fatalf("test login prep error: %s", err)
+		t.Fatalf("test register prep error: %s", err)
 	}
 
 	p2 := models.RegisterRequest{
@@ -36,9 +36,10 @@ func TestRegister(t *testing.T) {
 
 	b2 := bytes.Buffer{}
 	if err := json.NewEncoder(&b2).Encode(&p2); err != nil {
-		t.Fatalf("test login prep error: %s", err)
+		t.Fatalf("test register prep error: %s", err)
 	}
 
+	endpoint := "/api/v1/auth/register"
 	tests := []struct {
 		Name    string
 		Req     *http.Request
@@ -47,13 +48,13 @@ func TestRegister(t *testing.T) {
 	}{
 		{
 			Name:    "Success",
-			Req:     httptest.NewRequest(http.MethodPost, "/api/v1/auth/register", &b1),
+			Req:     httptest.NewRequest(http.MethodPost, endpoint, &b1),
 			Res:     httptest.NewRecorder(),
 			ExpCode: http.StatusOK,
 		},
 		{
 			Name:    "IncompleteInput",
-			Req:     httptest.NewRequest(http.MethodPost, "/api/v1/auth/register", &b2),
+			Req:     httptest.NewRequest(http.MethodPost, endpoint, &b2),
 			Res:     httptest.NewRecorder(),
 			ExpCode: http.StatusBadRequest,
 		},
@@ -63,13 +64,14 @@ func TestRegister(t *testing.T) {
 		t.Run(test.Name, func(t *testing.T) {
 			h.Register(test.Res, test.Req)
 			if test.Res.Code != test.ExpCode {
+				t.Errorf("%s error response: %s", test.Name, test.Res.Body.String())
 				t.Errorf("expected code is %v, but got %v\n", test.ExpCode, test.Res.Code)
 			}
 		})
 	}
 }
 
-func (h *Handler) PrepTestRegister() (*models.RegisterTest1, error) {
+func (h *Handler) prepTestRegister() (*models.RegisterTest1, error) {
 	var r1 models.RegisterTest1
 	if err := faker.FakeData(&r1); err != nil {
 		return nil, err

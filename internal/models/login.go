@@ -17,7 +17,7 @@ type LoginResponse struct {
 }
 
 type LoginTest1 struct {
-	UserID     uint32 `faker:"unique"`
+	UserID     uint64 `faker:"unique"`
 	Name       string `faker:"name"`
 	Username   string `faker:"username,unique"`
 	Email      string `faker:"email,unique"`
@@ -26,7 +26,7 @@ type LoginTest1 struct {
 }
 
 type LoginTest2 struct {
-	UserID    uint32    `faker:"-"`
+	UserID    uint64    `faker:"-"`
 	Token     string    `faker:"len=40"`
 	CreatedAt time.Time `faker:"-"`
 }

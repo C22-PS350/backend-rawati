@@ -17,8 +17,8 @@ var key ctxKey = "userID"
 var (
 	authFindUserByToken = `
 		SELECT user_id
-		FROM user u
-		JOIN user_token ut
+		FROM users u
+		JOIN user_token ut USING (user_id)
 		WHERE ut.token = ?
 	`
 )
@@ -38,12 +38,13 @@ func (h *Handler) AuthMiddleware(next http.Handler) http.Handler {
 
 		d, ok := h.C.Get(authHeader[1])
 		if ok {
-			ctx := context.WithValue(r.Context(), key, *(d.(*uint32)))
+			ctx := context.WithValue(r.Context(), key, *(d.(*uint64)))
 			next.ServeHTTP(w, r.WithContext(ctx))
+			return
 		}
 
 		var u struct {
-			UserID uint32
+			UserID uint64
 		}
 		if err := h.DB.Raw(authFindUserByToken, authHeader[1]).Scan(&u).Error; err != nil {
 			utils.RespondErr(w, http.StatusInternalServerError, err)
@@ -59,4 +60,8 @@ func (h *Handler) AuthMiddleware(next http.Handler) http.Handler {
 		ctx := context.WithValue(r.Context(), key, u.UserID)
 		next.ServeHTTP(w, r.WithContext(ctx))
 	})
+}
+
+func getUserContext(r *http.Request) uint64 {
+	return r.Context().Value(key).(uint64)
 }

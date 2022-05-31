@@ -19,6 +19,7 @@ import (
 
 // @Summary      register user
 // @Description  register a user account
+// @Tags         auth
 // @Accept       json
 // @Param        payload  body  models.RegisterRequest true  "request body"
 // @Produce      json

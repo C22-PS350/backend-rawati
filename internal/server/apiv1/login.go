@@ -23,6 +23,7 @@ var (
 
 // @Summary      login user
 // @Description  login a user account
+// @Tags         auth
 // @Accept       json
 // @Param        payload  body  models.LoginRequest true  "request body"
 // @Produce      json

@@ -62,8 +62,9 @@ func (srv *Server) createHandler() (*apiv1.Handler, error) {
 	c := cache.New(20*time.Minute, 10*time.Minute)
 
 	handler := &apiv1.Handler{
-		DB: db,
-		C:  c,
+		Environment: srv.Config.Environment,
+		DB:          db,
+		C:           c,
 	}
 
 	return handler, nil

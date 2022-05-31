@@ -6,6 +6,7 @@ import (
 )
 
 type Handler struct {
-	DB *gorm.DB
-	C  *cache.Cache
+	Environment string
+	DB          *gorm.DB
+	C           *cache.Cache
 }

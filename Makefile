@@ -30,6 +30,9 @@ docs-read:
 test-prepare:
 	@docker-compose -f ./tests/docker-compose.yml up -d
 
+dev-test-start:
+	go.exe test -v -count=1 ./...
+
 test-start:
 	go test -v ./...
 

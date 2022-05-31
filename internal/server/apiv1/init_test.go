@@ -15,7 +15,8 @@ func TestMain(m *testing.M) {
 		panic(err)
 	}
 	h = &Handler{
-		DB: db,
+		Environment: "testing",
+		DB:          db,
 	}
 	m.Run()
 }

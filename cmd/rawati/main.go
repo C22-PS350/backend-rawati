@@ -16,6 +16,7 @@ import (
 // @name                          Authorization
 func main() {
 	srvcfg := server.Config{
+		Environment:  environment,
 		AppHost:      appHost,
 		AppPort:      appPort,
 		DBConnString: dbConnStr,

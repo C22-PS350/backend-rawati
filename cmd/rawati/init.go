@@ -6,17 +6,21 @@ import (
 )
 
 var (
-	appHost    = os.Getenv("APP_HOST")
-	appPort    = os.Getenv("APP_PORT")
-	dbHost     = os.Getenv("DB_HOST")
-	dbPort     = os.Getenv("DB_PORT")
-	dbUsername = os.Getenv("DB_USERNAME")
-	dbPassword = os.Getenv("DB_PASSWORD")
-	dbName     = os.Getenv("DB_NAME")
-	dbConnStr  = "%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True"
+	environment = os.Getenv("ENVIRONMENT")
+	appHost     = os.Getenv("APP_HOST")
+	appPort     = os.Getenv("APP_PORT")
+	dbHost      = os.Getenv("DB_HOST")
+	dbPort      = os.Getenv("DB_PORT")
+	dbUsername  = os.Getenv("DB_USERNAME")
+	dbPassword  = os.Getenv("DB_PASSWORD")
+	dbName      = os.Getenv("DB_NAME")
+	dbConnStr   = "%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True"
 )
 
 func init() {
+	if environment == "" {
+		environment = "development"
+	}
 	if appHost == "" {
 		appHost = "0.0.0.0"
 	}

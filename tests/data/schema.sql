@@ -20,8 +20,7 @@ CREATE TABLE user_token (
     user_id INT,
     token CHAR(40),
     created_at DATETIME NOT NULL,
-    deleted_at DATETIME,
-    PRIMARY KEY (user_id,token),
-    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    PRIMARY KEY (user_id, token),
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
     UNIQUE (token)
 )

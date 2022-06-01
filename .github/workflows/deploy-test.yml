@@ -5,7 +5,7 @@ on:
     branches: [ deploy-test ]
 
 env:
-  service: rawati-backend
+  SERVICE: rawati-backend
 
 jobs:
   deploy:
@@ -22,8 +22,8 @@ jobs:
     - name: Deploy to Cloud Run
       uses: google-github-actions/deploy-cloudrun@v0
       with:
-        service: ${{ env.service }}
-        image: gcr.io/${{ secrets.GCP_PROJECT }}/${{ env.service }}:${{ GITHUB_SHA }}
+        service: ${{ env.SERVICE }}
+        image: gcr.io/${{ secrets.GCP_PROJECT }}/${{ env.SERVICE }}:${{ github.sha }}
         region: asia-southeast1
         env_vars: |
           INSTANCE_CONNECTION_NAME=${{ secrets.INSTANCE_CONNECTION_NAME }},

@@ -1,8 +1,8 @@
 package server
 
 import (
+	"database/sql"
 	"fmt"
-	"log"
 	"net/http"
 	"time"
 
@@ -26,7 +26,7 @@ func New(cfg *Config) *Server {
 func (srv *Server) Start() error {
 	router, err := srv.createRouter()
 	if err != nil {
-		log.Panicf("error creating router: %s", err)
+		return err
 	}
 
 	return http.ListenAndServe(fmt.Sprintf("%s:%s", srv.Config.AppHost, srv.Config.AppPort), router)
@@ -54,7 +54,19 @@ func (srv *Server) createRouter() (http.Handler, error) {
 }
 
 func (srv *Server) createHandler() (*apiv1.Handler, error) {
-	db, err := gorm.Open(mysql.Open(srv.Config.DBConnString), &gorm.Config{})
+	dbPool, err := sql.Open("mysql", srv.Config.DBConnString)
+	if err != nil {
+		return nil, err
+	}
+
+	if err := dbPool.Ping(); err != nil {
+		return nil, err
+	}
+
+	db, err := gorm.Open(mysql.New(mysql.Config{
+		Conn: dbPool,
+	},
+	), &gorm.Config{})
 	if err != nil {
 		return nil, err
 	}

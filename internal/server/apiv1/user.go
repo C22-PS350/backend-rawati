@@ -195,9 +195,21 @@ func (h *Handler) DeleteUser(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
+	var t string
+	if h.Environment != "testing" {
+		if err := h.DB.Raw(authFindTokenByUser, userID).Scan(&t).Error; err != nil {
+			utils.RespondErr(w, http.StatusInternalServerError, err)
+			return
+		}
+	}
+
 	if err := h.DB.Table("users").Where("user_id = ?", userID).Delete(&struct{}{}).Error; err != nil {
 		utils.RespondErr(w, http.StatusInternalServerError, err)
 		return
+	}
+
+	if h.Environment != "testing" {
+		h.C.Delete(t)
 	}
 
 	resp := models.UpdateUserResponse{UserID: userID}

@@ -21,6 +21,12 @@ var (
 		JOIN user_token ut USING (user_id)
 		WHERE ut.token = ?
 	`
+	authFindTokenByUser = `
+		SELECT token
+		FROM users u
+		JOIN user_token ut USING (user_id)
+		WHERE ut.user_id = ?
+	`
 )
 
 func (h *Handler) AuthMiddleware(next http.Handler) http.Handler {

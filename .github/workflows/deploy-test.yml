@@ -14,7 +14,8 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v3
 
-    - id: auth
+    - name: Google auth
+      id: auth
       uses: google-github-actions/auth@v0
       with:
         credentials_json: ${{ secrets.GCP_SA_KEY }}
@@ -30,5 +31,6 @@ jobs:
           DB_USER=${{ secrets.DB_USER }},
           DB_PASS=${{ secrets.DB_PASS }},
           DB_NAME=${{ secrets.DB_NAME }}
+        source: .
         flags: --timeout=300 --min-instances=0 --max-instances=1 --port=8080 --set-cloudsql-instances=${{ secrets.SQL_INSTANCE }}
 

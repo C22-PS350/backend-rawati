@@ -9,6 +9,7 @@ var (
 	environment = os.Getenv("ENVIRONMENT")
 	appHost     = os.Getenv("APP_HOST")
 	appPort     = os.Getenv("APP_PORT")
+	gcpProject  = os.Getenv("GCP_PROJECT")
 	dbConnStr   = ""
 )
 
@@ -67,6 +68,9 @@ func init() {
 		}
 		if dbName == "" {
 			panic("DB_NAME env is not set")
+		}
+		if gcpProject == "" {
+			panic("GCP_PROJECT env is not set")
 		}
 
 		dbConnStr = "%s:%s@unix(/cloudsql/%s)/%s?charset=utf8mb4&parseTime=True&loc=Local"

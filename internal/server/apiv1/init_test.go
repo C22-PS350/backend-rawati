@@ -3,6 +3,7 @@ package apiv1
 import (
 	"testing"
 
+	"github.com/C22-PS350/backend-rawati/internal/utils"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -15,7 +16,7 @@ func TestMain(m *testing.M) {
 		panic(err)
 	}
 	h = &Handler{
-		Environment: "testing",
+		Environment: utils.Testing,
 		DB:          db,
 	}
 	m.Run()

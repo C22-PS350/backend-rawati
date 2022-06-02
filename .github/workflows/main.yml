@@ -83,5 +83,6 @@ jobs:
           DB_USER=${{ secrets.DB_USER }}
           DB_PASS=${{ secrets.DB_PASS }}
           DB_NAME=${{ secrets.DB_NAME }}
+          GCP_PROJECT=${{ secrets.GCP_PROJECT }}
         source: .
         flags: --timeout=400 --min-instances=0 --max-instances=1 --port=8080 --set-cloudsql-instances=${{ secrets.SQL_INSTANCE }}

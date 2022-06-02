@@ -49,21 +49,19 @@ func (h *Handler) AuthMiddleware(next http.Handler) http.Handler {
 			return
 		}
 
-		var u struct {
-			UserID uint64
-		}
-		if err := h.DB.Raw(authFindUserByToken, authHeader[1]).Scan(&u).Error; err != nil {
+		var userID uint64
+		if err := h.DB.Raw(authFindUserByToken, authHeader[1]).Scan(&userID).Error; err != nil {
 			utils.RespondErr(w, http.StatusInternalServerError, err)
 			return
 		}
 
-		if u.UserID == 0 {
+		if userID == 0 {
 			utils.RespondErr(w, http.StatusUnauthorized, errors.New("invalid user token"))
 			return
 		}
 
-		h.C.Set(authHeader[1], &u.UserID, cache.DefaultExpiration)
-		ctx := context.WithValue(r.Context(), key, u.UserID)
+		h.C.Set(authHeader[1], &userID, cache.DefaultExpiration)
+		ctx := context.WithValue(r.Context(), key, userID)
 		next.ServeHTTP(w, r.WithContext(ctx))
 	})
 }

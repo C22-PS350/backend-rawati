@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/C22-PS350/backend-rawati/internal/server/apiv1"
+	"github.com/C22-PS350/backend-rawati/internal/utils"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/cors"
@@ -77,6 +78,13 @@ func (srv *Server) createHandler() (*apiv1.Handler, error) {
 		Environment: srv.Config.Environment,
 		DB:          db,
 		C:           c,
+	}
+
+	if srv.Config.Environment == utils.Remote {
+		handler, err = srv.setupGCPClient(handler)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	return handler, nil

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/C22-PS350/backend-rawati/internal/server"
@@ -20,10 +21,11 @@ func main() {
 		AppHost:      appHost,
 		AppPort:      appPort,
 		DBConnString: dbConnStr,
+		GCPProject:   gcpProject,
 	}
 
 	srv := server.New(&srvcfg)
-	log.Printf("starting server on %s:%s\n", srv.Config.AppHost, srv.Config.AppPort)
+	fmt.Printf("starting server on %s:%s\n", srv.Config.AppHost, srv.Config.AppPort)
 	if err := srv.Start(); err != nil {
 		log.Panicf("error starting server: %s", err)
 	}

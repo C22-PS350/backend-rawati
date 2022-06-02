@@ -32,7 +32,7 @@ func (h *Handler) GetUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if h.Environment != "testing" {
+	if h.Environment != utils.Testing {
 		if userID != getUserContext(r) {
 			utils.RespondErr(w, http.StatusForbidden, errors.New("invalid operation: unmatched user id"))
 			return
@@ -67,7 +67,7 @@ func (h *Handler) UpdateUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if h.Environment != "testing" {
+	if h.Environment != utils.Testing {
 		if userID != getUserContext(r) {
 			utils.RespondErr(w, http.StatusForbidden, errors.New("invalid operation: unmatched user id"))
 			return
@@ -121,7 +121,7 @@ func (h *Handler) UpdateUserPassword(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if h.Environment != "testing" {
+	if h.Environment != utils.Testing {
 		if userID != getUserContext(r) {
 			utils.RespondErr(w, http.StatusForbidden, errors.New("invalid operation: unmatched user id"))
 			return
@@ -188,15 +188,13 @@ func (h *Handler) DeleteUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if h.Environment != "testing" {
+	var t string
+	if h.Environment != utils.Testing {
 		if userID != getUserContext(r) {
 			utils.RespondErr(w, http.StatusForbidden, errors.New("invalid operation: unmatched user id"))
 			return
 		}
-	}
 
-	var t string
-	if h.Environment != "testing" {
 		if err := h.DB.Raw(authFindTokenByUser, userID).Scan(&t).Error; err != nil {
 			utils.RespondErr(w, http.StatusInternalServerError, err)
 			return
@@ -208,7 +206,7 @@ func (h *Handler) DeleteUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if h.Environment != "testing" {
+	if h.Environment != utils.Testing {
 		h.C.Delete(t)
 	}
 

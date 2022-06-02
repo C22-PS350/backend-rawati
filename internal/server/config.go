@@ -5,4 +5,5 @@ type Config struct {
 	AppHost      string
 	AppPort      string
 	DBConnString string
+	GCPProject   string
 }

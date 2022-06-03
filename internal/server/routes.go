@@ -9,6 +9,7 @@ func setupRoutes(r *chi.Mux, h *apiv1.Handler) {
 	r.Route("/api/v1", func(r chi.Router) {
 		r.Post("/auth/register", h.Register)
 		r.Post("/auth/login", h.Login)
+		r.Put("/auth/forgot-password", h.ForgotPassword)
 
 		r.Group(func(r chi.Router) {
 			r.Use(h.AuthMiddleware)

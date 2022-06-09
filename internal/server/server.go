@@ -3,6 +3,7 @@ package server
 import (
 	"database/sql"
 	"fmt"
+	"math/rand"
 	"net/http"
 	"time"
 
@@ -45,6 +46,7 @@ func (srv *Server) createRouter() (http.Handler, error) {
 		AllowCredentials: true,
 	}))
 
+	rand.Seed(time.Now().UnixNano())
 	handler, err := srv.createHandler()
 	if err != nil {
 		return nil, err

@@ -51,6 +51,7 @@ func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
 	req.Password = &hashedPwdStr
 
 	var userToken models.RegisterUserToken
+	var userProfile models.UserProfileRequest
 	if err := h.DB.Transaction(func(tx *gorm.DB) error {
 		if err := tx.Table("users").Create(&req).Error; err != nil {
 			return err
@@ -60,6 +61,11 @@ func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
 		userToken.Token = generateToken(20)
 		userToken.CreatedAt = time.Now()
 		if err := tx.Table("user_token").Create(&userToken).Error; err != nil {
+			return err
+		}
+
+		userProfile.UserID = &req.UserID
+		if err := tx.Table("user_profile").Create(&userProfile).Error; err != nil {
 			return err
 		}
 		return nil

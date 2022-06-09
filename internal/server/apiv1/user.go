@@ -13,6 +13,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/go-sql-driver/mysql"
 	"golang.org/x/crypto/bcrypt"
+	"gorm.io/gorm"
 )
 
 // @Summary      get user info
@@ -23,6 +24,7 @@ import (
 // @Success      200  {object}  utils.JsonOK{data=models.GetUserResponse}
 // @Failure      400  {object}  utils.JsonErr
 // @Failure      403  {object}  utils.JsonErr
+// @Failure      404  {object}  utils.JsonErr
 // @Failure      500  {object}  utils.JsonErr
 // @Router       /users/{user_id} [get]
 func (h *Handler) GetUser(w http.ResponseWriter, r *http.Request) {
@@ -41,6 +43,10 @@ func (h *Handler) GetUser(w http.ResponseWriter, r *http.Request) {
 
 	var resp models.GetUserResponse
 	if err := h.DB.Table("users").First(&resp, userID).Error; err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			utils.RespondErr(w, http.StatusNotFound, errors.New("record not found"))
+		}
+
 		utils.RespondErr(w, http.StatusInternalServerError, err)
 		return
 	}

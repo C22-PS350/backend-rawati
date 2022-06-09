@@ -14,7 +14,7 @@ import (
 
 var (
 	loginFindUserByIdentifier = `
-		SELECT password, token
+		SELECT user_id, password, token
 		FROM users u
 		JOIN user_token ut USING (user_id)
 		WHERE u.username = ? OR u.email = ?
@@ -60,6 +60,6 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	resp := models.LoginResponse{Token: data.Token}
+	resp := models.LoginResponse{UserID: data.UserID, Token: data.Token}
 	utils.RespondOK(w, &resp)
 }

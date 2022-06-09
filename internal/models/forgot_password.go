@@ -4,6 +4,10 @@ type ForgotPasswordRequest struct {
 	Email string `json:"email" validate:"required,email,max=60"`
 }
 
+type ForgotPasswordResponse struct {
+	Message string `json:"message"`
+}
+
 type ForgotPasswordData struct {
 	UserID   uint64
 	Username string

@@ -8,12 +8,14 @@ type LoginRequest struct {
 }
 
 type LoginData struct {
+	UserID   uint64 `validate:"required"`
 	Password string `validate:"required"`
 	Token    string `validate:"required"`
 }
 
 type LoginResponse struct {
-	Token string `json:"token"`
+	UserID uint64 `json:"user_id"`
+	Token  string `json:"token"`
 }
 
 type LoginTest1 struct {

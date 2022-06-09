@@ -48,7 +48,7 @@ func init() {
 			dbName = "rawati"
 		}
 
-		dbConnStr = "%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local"
+		dbConnStr = "%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True"
 		dbConnStr = fmt.Sprintf(dbConnStr, dbUser, dbPass, dbHost, dbPort, dbName)
 
 	case "remote-development":
@@ -73,7 +73,7 @@ func init() {
 			panic("GCP_PROJECT env is not set")
 		}
 
-		dbConnStr = "%s:%s@unix(/cloudsql/%s)/%s?charset=utf8mb4&parseTime=True&loc=Local"
+		dbConnStr = "%s:%s@unix(/cloudsql/%s)/%s?charset=utf8mb4&parseTime=True"
 		dbConnStr = fmt.Sprintf(dbConnStr, dbUser, dbPass, instanceConnectionName, dbName)
 
 	default:

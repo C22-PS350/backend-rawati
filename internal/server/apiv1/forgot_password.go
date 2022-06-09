@@ -110,5 +110,6 @@ func (h *Handler) ForgotPassword(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
+	resp := models.ForgotPasswordResponse{Message: "forgot password request success"}
+	utils.RespondOK(w, &resp)
 }

@@ -65,7 +65,7 @@ func (h *Handler) GetUser(w http.ResponseWriter, r *http.Request) {
 // @Failure      400  {object}  utils.JsonErr
 // @Failure      403  {object}  utils.JsonErr
 // @Failure      500  {object}  utils.JsonErr
-// @Router       /users/{user_id}/update [put]
+// @Router       /users/{user_id} [put]
 func (h *Handler) UpdateUser(w http.ResponseWriter, r *http.Request) {
 	userID, err := strconv.ParseUint(chi.URLParam(r, "user_id"), 10, 64)
 	if err != nil {

@@ -15,8 +15,8 @@ import (
 // @Summary      get all exercise activity
 // @Description  get all exercise activity
 // @Tags         activity exercise
-// @Param        user_id path int true "User ID"
-// @Param        date    query     string  true  "Date"
+// @Param        user_id  path   int     true  "User ID"
+// @Param        date     query  string  true  "Date (ISO 8601 - date only)"
 // @Produce      json
 // @Success      200  {object}  utils.JsonOK{data=[]models.ExerciseActivityResponse}
 // @Failure      400  {object}  utils.JsonErr
@@ -61,8 +61,8 @@ func (h *Handler) GetAllExerciseActivity(w http.ResponseWriter, r *http.Request)
 // @Summary      get exercise activity
 // @Description  get exercise activity
 // @Tags         activity exercise
-// @Param        user_id path int true "User ID"
-// @Param        exercise_id path int true "Exercise Activity ID"
+// @Param        user_id      path  int  true  "User ID"
+// @Param        exercise_id  path  int  true  "Exercise Activity ID"
 // @Produce      json
 // @Success      200  {object}  utils.JsonOK{data=models.ExerciseActivityResponse}
 // @Failure      400  {object}  utils.JsonErr

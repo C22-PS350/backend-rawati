@@ -19,7 +19,7 @@ import (
 // @Summary      get user info
 // @Description  get user info
 // @Tags         user
-// @Param        user_id path int true "User ID"
+// @Param        user_id  path  int  true  "User ID"
 // @Produce      json
 // @Success      200  {object}  utils.JsonOK{data=models.GetUserResponse}
 // @Failure      400  {object}  utils.JsonErr
@@ -58,8 +58,8 @@ func (h *Handler) GetUser(w http.ResponseWriter, r *http.Request) {
 // @Description  update user account info
 // @Tags         user
 // @Accept       json
-// @Param        user_id path int true "User ID"
-// @Param        payload  body  models.UpdateUserRequest true "request body"
+// @Param        user_id  path  int                       true  "User ID"
+// @Param        payload  body  models.UpdateUserRequest  true  "request body"
 // @Produce      json
 // @Success      200  {object}  utils.JsonOK{data=models.UpdateUserResponse}
 // @Failure      400  {object}  utils.JsonErr
@@ -112,8 +112,8 @@ func (h *Handler) UpdateUser(w http.ResponseWriter, r *http.Request) {
 // @Description  update authenticated user password
 // @Tags         user
 // @Accept       json
-// @Param        user_id path int true "User ID"
-// @Param        payload  body  models.UpdateUserPwdRequest true "request body"
+// @Param        user_id  path  int                          true  "User ID"
+// @Param        payload  body  models.UpdateUserPwdRequest  true  "request body"
 // @Produce      json
 // @Success      200  {object}  utils.JsonOK{data=models.UpdateUserResponse}
 // @Failure      400  {object}  utils.JsonErr
@@ -180,7 +180,7 @@ func (h *Handler) UpdateUserPassword(w http.ResponseWriter, r *http.Request) {
 // @Summary      delete user
 // @Description  delete user
 // @Tags         user
-// @Param        user_id path int true "User ID"
+// @Param        user_id  path  int  true  "User ID"
 // @Produce      json
 // @Success      200  {object}  utils.JsonOK{data=models.UpdateUserResponse}
 // @Failure      400  {object}  utils.JsonErr

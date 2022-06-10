@@ -25,7 +25,7 @@ var (
 // @Description  login a user account
 // @Tags         auth
 // @Accept       json
-// @Param        payload  body  models.LoginRequest true  "request body"
+// @Param        payload  body  models.LoginRequest  true  "request body"
 // @Produce      json
 // @Success      200  {object}  utils.JsonOK{data=models.LoginResponse}
 // @Failure      400  {object}  utils.JsonErr

@@ -17,7 +17,7 @@ import (
 // @Summary      get user profile info
 // @Description  get user profile info
 // @Tags         user profile
-// @Param        user_id path int true "User ID"
+// @Param        user_id  path  int  true  "User ID"
 // @Produce      json
 // @Success      200  {object}  utils.JsonOK{data=models.GetUserProfileResponse}
 // @Failure      400  {object}  utils.JsonErr
@@ -56,8 +56,8 @@ func (h *Handler) GetUserProfile(w http.ResponseWriter, r *http.Request) {
 // @Description  update user profile info
 // @Tags         user profile
 // @Accept       json
-// @Param        user_id path int true "User ID"
-// @Param        payload  body  models.UserProfileRequest true "request body"
+// @Param        user_id  path  int                        true  "User ID"
+// @Param        payload  body  models.UserProfileRequest  true  "request body"
 // @Produce      json
 // @Success      200  {object}  utils.JsonOK{data=models.UserProfileResponse}
 // @Failure      400  {object}  utils.JsonErr

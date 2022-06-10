@@ -8,7 +8,6 @@ env:
   SERVICE: rawati-backend
 
 jobs:
-
   test:
     runs-on: ubuntu-latest
     steps:
@@ -75,7 +74,6 @@ jobs:
       uses: google-github-actions/deploy-cloudrun@v0
       with:
         service: ${{ env.SERVICE }}
-        image: gcr.io/${{ secrets.GCP_PROJECT }}/${{ env.SERVICE }}:${{ github.sha }}
         region: asia-southeast1
         env_vars: |
           ENVIRONMENT=remote-development
@@ -85,4 +83,4 @@ jobs:
           DB_NAME=${{ secrets.DB_NAME }}
           GCP_PROJECT=${{ secrets.GCP_PROJECT }}
         source: .
-        flags: --timeout=400 --min-instances=0 --max-instances=1 --port=8080 --set-cloudsql-instances=${{ secrets.SQL_INSTANCE }}
+        flags: --timeout=1000 --cpu-throttling --min-instances=1 --max-instances=1 --set-cloudsql-instances=${{ secrets.SQL_INSTANCE }}

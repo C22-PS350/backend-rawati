@@ -17,11 +17,10 @@ import (
 // @Description  get food recommendation
 // @Tags         recommendation
 // @Accept       json
-// @Param        payload  body  models.FoodRecommendationRequest true "request body"
+// @Param        payload  body  models.FoodRecommendationRequest  true  "request body"
 // @Produce      json
-// @Success      200  {object}  utils.JsonOK{data=models.FoodResponse}
+// @Success      200  {object}  utils.JsonOK{data=[]models.FoodResponse}
 // @Failure      400  {object}  utils.JsonErr
-// @Failure      404  {object}  utils.JsonErr
 // @Failure      500  {object}  utils.JsonErr
 // @Router       /recommendation/food [post]
 func (h *Handler) CreateFoodRecommendation(w http.ResponseWriter, r *http.Request) {
@@ -47,14 +46,15 @@ func (h *Handler) CreateFoodRecommendation(w http.ResponseWriter, r *http.Reques
 		data[i], data[j] = data[j], data[i]
 	})
 
-	var resp models.FoodResponse
+	resp := make([]models.FoodResponse, 0, 3)
 	for _, v := range data {
 		if math.Abs(math.Abs(req.Calories)-math.Abs(v.Calories)) <= 50 {
-			resp = v
-			utils.RespondOK(w, &resp)
-			return
+			if len(resp) == 3 {
+				break
+			}
+			resp = append(resp, v)
 		}
 	}
 
-	utils.RespondErr(w, http.StatusNotFound, errors.New("record not found"))
+	utils.RespondOK(w, &resp)
 }

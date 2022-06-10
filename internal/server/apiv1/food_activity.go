@@ -18,8 +18,8 @@ import (
 // @Summary      get all food activity
 // @Description  get all food activity
 // @Tags         activity food
-// @Param        user_id path int true "User ID"
-// @Param        date    query     string  true  "Date"
+// @Param        user_id  path   int     true  "User ID"
+// @Param        date     query  string  true  "Date (ISO 8601 - date only)"
 // @Produce      json
 // @Success      200  {object}  utils.JsonOK{data=[]models.FoodActivityResponse}
 // @Failure      400  {object}  utils.JsonErr
@@ -64,8 +64,8 @@ func (h *Handler) GetAllFoodActivity(w http.ResponseWriter, r *http.Request) {
 // @Summary      get food activity
 // @Description  get food activity
 // @Tags         activity food
-// @Param        user_id path int true "User ID"
-// @Param        food_id path int true "Food Activity ID"
+// @Param        user_id  path  int  true  "User ID"
+// @Param        food_id  path  int  true  "Food Activity ID"
 // @Produce      json
 // @Success      200  {object}  utils.JsonOK{data=models.FoodActivityResponse}
 // @Failure      400  {object}  utils.JsonErr
@@ -111,8 +111,8 @@ func (h *Handler) GetFoodActivity(w http.ResponseWriter, r *http.Request) {
 // @Description  create food activity
 // @Tags         activity food
 // @Accept       json
-// @Param        payload  body  models.FoodActivityRequest true  "request body"
-// @Param        user_id path int true "User ID"
+// @Param        payload  body  models.FoodActivityRequest  true  "request body"
+// @Param        user_id  path  int                         true  "User ID"
 // @Produce      json
 // @Success      200  {object}  utils.JsonOK{data=models.FoodActivityCreateResponse}
 // @Failure      400  {object}  utils.JsonErr

@@ -26,7 +26,7 @@ var (
 // @Description  update unauthenticated user password
 // @Tags         auth
 // @Accept       json
-// @Param        payload  body  models.ForgotPasswordRequest true  "request body"
+// @Param        payload  body  models.ForgotPasswordRequest  true  "request body"
 // @Produce      json
 // @Success      200
 // @Failure      400  {object}  utils.JsonErr

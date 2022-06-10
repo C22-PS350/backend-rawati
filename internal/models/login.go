@@ -3,8 +3,8 @@ package models
 import "time"
 
 type LoginRequest struct {
-	Identifier string `json:"identifier" validate:"required"`
-	Password   string `json:"password" validate:"required"`
+	Identifier string `json:"identifier" validate:"required" example:"farrylvanhouten (username) or farryl@gmail.com (email)"`
+	Password   string `json:"password" validate:"required" example:"kmzwa8awaa"`
 }
 
 type LoginData struct {

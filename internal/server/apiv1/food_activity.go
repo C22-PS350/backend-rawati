@@ -17,7 +17,7 @@ import (
 
 // @Summary      get all food activity
 // @Description  get all food activity
-// @Tags         activity food
+// @Tags         activity (food)
 // @Param        user_id  path   int     true  "User ID"
 // @Param        date     query  string  true  "Date (ISO 8601 - date only)"
 // @Produce      json
@@ -63,7 +63,7 @@ func (h *Handler) GetAllFoodActivity(w http.ResponseWriter, r *http.Request) {
 
 // @Summary      get food activity
 // @Description  get food activity
-// @Tags         activity food
+// @Tags         activity (food)
 // @Param        user_id  path  int  true  "User ID"
 // @Param        food_id  path  int  true  "Food Activity ID"
 // @Produce      json
@@ -109,7 +109,7 @@ func (h *Handler) GetFoodActivity(w http.ResponseWriter, r *http.Request) {
 
 // @Summary      create food activity
 // @Description  create food activity
-// @Tags         activity food
+// @Tags         activity (food)
 // @Accept       json
 // @Param        payload  body  models.FoodActivityRequest  true  "request body"
 // @Param        user_id  path  int                         true  "User ID"

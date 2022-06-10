@@ -14,7 +14,7 @@ import (
 
 // @Summary      get all exercise activity
 // @Description  get all exercise activity
-// @Tags         activity exercise
+// @Tags         activity (exercise)
 // @Param        user_id  path   int     true  "User ID"
 // @Param        date     query  string  true  "Date (ISO 8601 - date only)"
 // @Produce      json
@@ -60,7 +60,7 @@ func (h *Handler) GetAllExerciseActivity(w http.ResponseWriter, r *http.Request)
 
 // @Summary      get exercise activity
 // @Description  get exercise activity
-// @Tags         activity exercise
+// @Tags         activity (exercise)
 // @Param        user_id      path  int  true  "User ID"
 // @Param        exercise_id  path  int  true  "Exercise Activity ID"
 // @Produce      json

@@ -3,11 +3,11 @@ package models
 import "time"
 
 type RegisterRequest struct {
-	UserID     uint64  `json:"-" gorm:"primaryKey" swaggerignore:"true"`
-	Name       *string `json:"name" validate:"required,max=60"`
-	Username   *string `json:"username" validate:"required,alphanum,max=30"`
-	Email      *string `json:"email" validate:"required,email,max=60"`
-	Password   *string `json:"password" validate:"required,max=60"`
+	UserID     uint64  `json:"-" gorm:"primaryKey"`
+	Name       *string `json:"name" validate:"required,max=60" maxLength:"60" example:"farryl van houten"`
+	Username   *string `json:"username" validate:"required,alphanum,max=30" maxLength:"30" example:"farrylvanhouten"`
+	Email      *string `json:"email" validate:"required,email,max=60" maxLength:"60" example:"farryl@gmail.com"`
+	Password   *string `json:"password" validate:"required,max=60" maxLength:"60" example:"kmzwa8awaa"`
 	IsVerified bool    `json:"-"`
 }
 

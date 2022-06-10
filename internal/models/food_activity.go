@@ -3,11 +3,11 @@ package models
 import "time"
 
 type FoodActivityRequest struct {
-	FoodActivityID uint64    `json:"-" gorm:"primaryKey" swaggerignore:"true"`
-	UserID         uint64    `json:"-" swaggerignore:"true"`
-	Name           string    `json:"name" validate:"required"`
-	FoodDate       time.Time `json:"-" swaggerignore:"true"`
-	Calories       float64   `json:"calories" validate:"required"`
+	FoodActivityID uint64    `json:"-" gorm:"primaryKey"`
+	UserID         uint64    `json:"-"`
+	Name           string    `json:"name" validate:"required" maxLength:"60" example:"leiyker"`
+	FoodDate       time.Time `json:"-"`
+	Calories       float64   `json:"calories" validate:"required" example:"200"`
 }
 
 type FoodActivityCreateResponse struct {

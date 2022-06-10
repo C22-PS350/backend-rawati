@@ -14,13 +14,13 @@ type GetUserProfileResponse struct {
 
 // create or update
 type UserProfileRequest struct {
-	ProfileID  uint64     `json:"-" gorm:"primaryKey" swaggerignore:"true"`
-	UserID     *uint64    `json:"-" swaggerignore:"true"`
-	Height     *uint16    `json:"height"`
-	Weight     *uint16    `json:"weight"`
-	WeightGoal *uint16    `json:"weight_goal"`
-	Gender     *string    `json:"gender"`
-	BirthDate  *time.Time `json:"birth_date"`
+	ProfileID  uint64     `json:"-" gorm:"primaryKey"`
+	UserID     *uint64    `json:"-"`
+	Height     *uint16    `json:"height" example:"183"`
+	Weight     *uint16    `json:"weight" example:"70"`
+	WeightGoal *uint16    `json:"weight_goal" example:"60"`
+	Gender     *string    `json:"gender" example:"L (male) or P (female)"`
+	BirthDate  *time.Time `json:"birth_date" example:"2022-06-10T14:39:11Z (ISO 8601 with UTC timezone)"`
 }
 
 type UserProfileResponse struct {

@@ -17,7 +17,7 @@ import (
 )
 
 // @Summary      get user info
-// @Description  get user info
+// @Description  get user account info
 // @Tags         user
 // @Param        user_id  path  int  true  "User ID"
 // @Produce      json
@@ -178,7 +178,7 @@ func (h *Handler) UpdateUserPassword(w http.ResponseWriter, r *http.Request) {
 }
 
 // @Summary      delete user
-// @Description  delete user
+// @Description  delete user account
 // @Tags         user
 // @Param        user_id  path  int  true  "User ID"
 // @Produce      json

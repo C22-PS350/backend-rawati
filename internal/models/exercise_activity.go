@@ -3,12 +3,12 @@ package models
 import "time"
 
 type ExerciseActivityRequest struct {
-	ExerciseActivityID uint64    `json:"-" gorm:"primaryKey" swaggerignore:"true"`
-	UserID             uint64    `json:"-" swaggerignore:"true"`
-	Name               string    `json:"name"`
-	ExerciseDate       time.Time `json:"-" swaggerignore:"true"`
-	Duration           int       `json:"duration"`
-	Calories           float64   `json:"calories"`
+	ExerciseActivityID uint64    `json:"-" gorm:"primaryKey"`
+	UserID             uint64    `json:"-"`
+	Name               string    `json:"name" validate:"required" maxLength:"60" example:"voleey"`
+	ExerciseDate       time.Time `json:"-"`
+	Duration           int       `json:"duration" example:"60"`
+	Calories           float64   `json:"calories" validate:"required" example:"200"`
 }
 
 type ExerciseActivityCreateResponse struct {

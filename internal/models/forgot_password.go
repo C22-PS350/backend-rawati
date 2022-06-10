@@ -1,7 +1,7 @@
 package models
 
 type ForgotPasswordRequest struct {
-	Email string `json:"email" validate:"required,email,max=60"`
+	Email string `json:"email" validate:"required,email,max=60" example:"farryl@gmail.com"`
 }
 
 type ForgotPasswordResponse struct {

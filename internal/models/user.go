@@ -12,9 +12,9 @@ type GetUserResponse struct {
 // UpdateUser
 type UpdateUserRequest struct {
 	UserID   uint64  `json:"-" gorm:"primaryKey"`
-	Name     *string `json:"name" validate:"required,max=60"`
-	Username *string `json:"username" validate:"required,alphanum,max=30"`
-	Email    *string `json:"email" validate:"required,email,max=60"`
+	Name     *string `json:"name" validate:"required,max=60" maxLength:"60" example:"farryl van houten"`
+	Username *string `json:"username" validate:"required,alphanum,max=30" maxLength:"30" example:"farrylvanhouten"`
+	Email    *string `json:"email" validate:"required,email,max=60" maxLength:"60" example:"farryl@gmail.com"`
 }
 
 type UpdateUserResponse struct {
@@ -32,8 +32,8 @@ type UpdateUserTest1 struct {
 
 // UpdateUserPassword
 type UpdateUserPwdRequest struct {
-	OldPassword string `json:"old_password" validate:"required,max=60"`
-	NewPassword string `json:"new_password" validate:"required,max=60"`
+	OldPassword string `json:"old_password" validate:"required,max=60" example:"kmzwa8awaa"`
+	NewPassword string `json:"new_password" validate:"required,max=60" maxLength:"60" example:"llakcolnu"`
 }
 
 type UpdateUserPwdData struct {

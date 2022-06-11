@@ -82,5 +82,6 @@ jobs:
           DB_PASS=${{ secrets.DB_PASS }}
           DB_NAME=${{ secrets.DB_NAME }}
           GCP_PROJECT=${{ secrets.GCP_PROJECT }}
+          MODEL_API_URL=${{ secrets.MODEL_API_URL }}
         source: .
         flags: --timeout=10 --cpu-throttling --min-instances=1 --max-instances=1 --set-cloudsql-instances=${{ secrets.SQL_INSTANCE }}

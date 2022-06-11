@@ -27,7 +27,7 @@ func setupRoutes(r *chi.Mux, h *apiv1.Handler) {
 			// activiy (exercise)
 			r.Get("/users/{user_id}/exercises", h.GetAllExerciseActivity)
 			r.Get("/users/{user_id}/exercises/{exercise_id}", h.GetExerciseActivity)
-			// r.Post("/users/{user_id}/exercises", h.CreateExerciseActivity)
+			r.Post("/users/{user_id}/exercises", h.CreateExerciseActivity)
 
 			// activiy (food)
 			r.Get("/users/{user_id}/foods", h.GetAllFoodActivity)

@@ -80,6 +80,7 @@ func (srv *Server) createHandler() (*apiv1.Handler, error) {
 		Environment: srv.Config.Environment,
 		DB:          db,
 		C:           c,
+		ModelAPIUrl: srv.Config.ModelAPIUrl,
 	}
 
 	if srv.Config.Environment == utils.Remote {

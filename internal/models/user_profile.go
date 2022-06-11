@@ -47,13 +47,3 @@ type UserProfileTest2 struct {
 	Gender     string `faker:"oneof: L, P"`
 	BirthDate  time.Time
 }
-
-type UserProfileTest3 struct {
-	ProfileID  uint64 `faker:"-"`
-	UserID     uint64 `faker:"-"`
-	Height     uint16 `faker:"boundary_start=0,boundary_end=200"`
-	Weight     uint16 `faker:"boundary_start=0,boundary_end=200"`
-	WeightGoal uint16 `faker:"boundary_start=0,boundary_end=80"`
-	Gender     string `faker:"oneof: L, P"`
-	BirthDate  time.Time
-}

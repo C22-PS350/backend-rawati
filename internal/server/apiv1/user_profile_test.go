@@ -122,7 +122,7 @@ func TestUpdateUserProfile(t *testing.T) {
 	}
 }
 
-func (h *Handler) prepTestUpdateUserProfile() (*models.UserProfileTest3, uint64, error) {
+func (h *Handler) prepTestUpdateUserProfile() (*models.UserProfileTest2, uint64, error) {
 	var u1 models.UserProfileTest1
 	if err := faker.FakeData(&u1); err != nil {
 		return nil, 0, err
@@ -133,7 +133,7 @@ func (h *Handler) prepTestUpdateUserProfile() (*models.UserProfileTest3, uint64,
 		return nil, 0, err
 	}
 
-	var u3 models.UserProfileTest3
+	var u3 models.UserProfileTest2
 	if err := faker.FakeData(&u3); err != nil {
 		return nil, 0, err
 	}

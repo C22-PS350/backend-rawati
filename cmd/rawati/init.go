@@ -10,6 +10,7 @@ var (
 	appHost     = os.Getenv("APP_HOST")
 	appPort     = os.Getenv("APP_PORT")
 	gcpProject  = os.Getenv("GCP_PROJECT")
+	modelAPIUrl = os.Getenv("MODEL_API_URL")
 	dbConnStr   = ""
 )
 
@@ -50,12 +51,14 @@ func init() {
 
 		dbConnStr = "%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True"
 		dbConnStr = fmt.Sprintf(dbConnStr, dbUser, dbPass, dbHost, dbPort, dbName)
+		modelAPIUrl = "http://localhost:5000/predictions"
 
 	case "remote-development":
 		instanceConnectionName := os.Getenv("INSTANCE_CONNECTION_NAME")
 		dbUser := os.Getenv("DB_USER")
 		dbPass := os.Getenv("DB_PASS")
 		dbName := os.Getenv("DB_NAME")
+		modelAPIUrl = os.Getenv("MODEL_API_URL")
 
 		if instanceConnectionName == "" {
 			panic("INSTANCE_CONNECTION_NAME env is not set")
@@ -71,6 +74,9 @@ func init() {
 		}
 		if gcpProject == "" {
 			panic("GCP_PROJECT env is not set")
+		}
+		if modelAPIUrl == "" {
+			panic("MODEL_API_URL env is not set")
 		}
 
 		dbConnStr = "%s:%s@unix(/cloudsql/%s)/%s?charset=utf8mb4&parseTime=True"

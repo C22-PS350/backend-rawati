@@ -8,6 +8,7 @@ import (
 
 type Handler struct {
 	Environment string
+	ModelAPIUrl string
 	DB          *gorm.DB
 	C           *cache.Cache
 	GcpClient   *GcpClient

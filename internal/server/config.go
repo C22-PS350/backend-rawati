@@ -6,4 +6,5 @@ type Config struct {
 	AppPort      string
 	DBConnString string
 	GCPProject   string
+	ModelAPIUrl  string
 }

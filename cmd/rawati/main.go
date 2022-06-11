@@ -22,6 +22,7 @@ func main() {
 		AppPort:      appPort,
 		DBConnString: dbConnStr,
 		GCPProject:   gcpProject,
+		ModelAPIUrl:  modelAPIUrl,
 	}
 
 	srv := server.New(&srvcfg)

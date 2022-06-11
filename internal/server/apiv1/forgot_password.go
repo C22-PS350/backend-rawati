@@ -28,7 +28,7 @@ var (
 // @Accept       json
 // @Param        payload  body  models.ForgotPasswordRequest  true  "request body"
 // @Produce      json
-// @Success      200
+// @Success      200  {object}  utils.JsonOK{data=models.ForgotPasswordResponse}
 // @Failure      400  {object}  utils.JsonErr
 // @Failure      500  {object}  utils.JsonErr
 // @Router       /auth/forgot-password [put]

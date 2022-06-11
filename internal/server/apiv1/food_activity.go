@@ -139,7 +139,6 @@ func (h *Handler) CreateFoodActivity(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	req.FoodDate = time.Now()
 	validate := validator.New()
 	if err := validate.Struct(&req); err != nil {
 		utils.RespondErr(w, http.StatusBadRequest, errors.New("request body validation error"))
@@ -147,6 +146,7 @@ func (h *Handler) CreateFoodActivity(w http.ResponseWriter, r *http.Request) {
 	}
 
 	req.UserID = userID
+	req.FoodDate = time.Now()
 	if err := h.DB.Table("food_per_day").Create(&req).Error; err != nil {
 		utils.RespondErr(w, http.StatusInternalServerError, err)
 		return

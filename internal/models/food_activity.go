@@ -5,7 +5,7 @@ import "time"
 type FoodActivityRequest struct {
 	FoodActivityID uint64    `json:"-" gorm:"primaryKey"`
 	UserID         uint64    `json:"-"`
-	Name           string    `json:"name" validate:"required" maxLength:"60" example:"leiyker"`
+	Name           string    `json:"name" validate:"required,max=60" maxLength:"60" example:"leiyker"`
 	FoodDate       time.Time `json:"-"`
 	Calories       float64   `json:"calories" validate:"required" example:"200"`
 }

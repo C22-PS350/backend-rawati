@@ -125,7 +125,6 @@ func (h *Handler) prepTestGetFoodActivity() (uint64, uint64, error) {
 	}
 
 	var f1 models.FoodActivityTest2
-	f1.UserID, f1.FoodDate = u1.UserID, time.Now()
 	if err := faker.FakeData(&f1); err != nil {
 		return 0, 0, err
 	}
@@ -134,6 +133,7 @@ func (h *Handler) prepTestGetFoodActivity() (uint64, uint64, error) {
 		return 0, 0, err
 	}
 
+	f1.UserID, f1.FoodDate = u1.UserID, time.Now()
 	if err := h.DB.Table("food_per_day").Create(&f1).Error; err != nil {
 		return 0, 0, err
 	}

@@ -16,7 +16,13 @@ type JsonErr struct {
 }
 
 type errContent struct {
-	Code    int    `json:"code"`
+	Code    int             `json:"code"`
+	Message string          `json:"message"`
+	Errors  []validationErr `json:"errors"`
+}
+
+type validationErr struct {
+	Field   string `json:"field"`
 	Message string `json:"message"`
 }
 
@@ -31,6 +37,13 @@ func RespondErr(w http.ResponseWriter, code int, err error) {
 	e := errContent{
 		Code:    code,
 		Message: err.Error(),
+		Errors:  []validationErr{},
+	}
+
+	errs := TranslateError(err)
+	if len(errs) != 0 {
+		e.Message = "request body validation error"
+		e.Errors = append(e.Errors, errs...)
 	}
 
 	if code == http.StatusInternalServerError {

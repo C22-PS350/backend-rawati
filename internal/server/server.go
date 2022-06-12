@@ -12,7 +12,6 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/cors"
-	"github.com/go-playground/validator/v10"
 	"github.com/patrickmn/go-cache"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -76,7 +75,7 @@ func (srv *Server) createHandler() (*apiv1.Handler, error) {
 	}
 
 	c := cache.New(20*time.Minute, 10*time.Minute)
-	v := validator.New()
+	v := NewValidator()
 
 	r := &apiv1.Refs{
 		Environment: srv.Config.Environment,

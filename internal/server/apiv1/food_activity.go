@@ -144,7 +144,8 @@ func (h *Handler) CreateFoodActivity(w http.ResponseWriter, r *http.Request) {
 	}
 
 	req.UserID = userID
-	req.FoodDate = time.Now()
+	loc, _ := time.LoadLocation("Asia/Jakarta")
+	req.FoodDate = time.Now().In(loc)
 	if err := h.DB.Table("food_per_day").Create(&req).Error; err != nil {
 		utils.RespondErr(w, http.StatusInternalServerError, err)
 		return

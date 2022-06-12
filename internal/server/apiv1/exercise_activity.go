@@ -216,7 +216,8 @@ func (h *Handler) CreateExerciseActivity(w http.ResponseWriter, r *http.Request)
 	}
 
 	req.UserID = userID
-	req.ExerciseDate = time.Now()
+	loc, _ := time.LoadLocation("Asia/Jakarta")
+	req.ExerciseDate = time.Now().In(loc)
 	req.Calories = predictResult.Calories
 	if err := h.DB.Table("exercise_per_day").Create(&req).Error; err != nil {
 		utils.RespondErr(w, http.StatusInternalServerError, err)

@@ -86,7 +86,7 @@ func (h *Handler) UpdateUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err := h.V.Struct(&req); err != nil {
-		utils.RespondErr(w, http.StatusBadRequest, errors.New("request body validation error"))
+		utils.RespondErr(w, http.StatusBadRequest, err)
 		return
 	}
 
@@ -139,7 +139,7 @@ func (h *Handler) UpdateUserPassword(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err := h.V.Struct(&req); err != nil {
-		utils.RespondErr(w, http.StatusBadRequest, errors.New("request body validation error"))
+		utils.RespondErr(w, http.StatusBadRequest, err)
 		return
 	}
 

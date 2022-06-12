@@ -10,7 +10,7 @@ type ExerciseActivityRequest struct {
 	Duration           float64   `json:"duration" validate:"required,number" example:"60"`
 	HeartRate          float64   `json:"heart_rate" gorm:"-" validate:"required,number" example:"100"`
 	BodyTemp           float64   `json:"body_temp" gorm:"-" example:"36.7"`
-	Calories           float64   `json:"calories" example:"200"`
+	Calories           float64   `json:"-" example:"200"`
 }
 
 type ExerciseActivityUserData struct {

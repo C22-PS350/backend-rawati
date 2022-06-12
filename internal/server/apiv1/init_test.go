@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/C22-PS350/backend-rawati/internal/utils"
+	"github.com/go-playground/validator/v10"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -15,9 +16,11 @@ func TestMain(m *testing.M) {
 	if err != nil {
 		panic(err)
 	}
+
 	h = &Handler{
-		Environment: utils.Testing,
-		DB:          db,
+		Refs: &Refs{Environment: utils.Testing},
+		Deps: &Deps{DB: db, V: validator.New()},
 	}
+
 	m.Run()
 }

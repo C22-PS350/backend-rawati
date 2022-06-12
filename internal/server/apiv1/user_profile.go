@@ -101,8 +101,8 @@ func (h *Handler) UpdateUserProfile(w http.ResponseWriter, r *http.Request) {
 // 		return
 // 	}
 
-// 	validate := validator.New()
-// 	if err := validate.Struct(&req); err != nil {
+//
+// 	if err := h.V.Struct(&req); err != nil {
 // 		utils.RespondErr(w, http.StatusBadRequest, errors.New("request body validation error"))
 // 		return
 // 	}

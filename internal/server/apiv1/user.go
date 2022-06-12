@@ -10,7 +10,6 @@ import (
 	"github.com/C22-PS350/backend-rawati/internal/models"
 	"github.com/C22-PS350/backend-rawati/internal/utils"
 	"github.com/go-chi/chi/v5"
-	"github.com/go-playground/validator/v10"
 	"github.com/go-sql-driver/mysql"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
@@ -86,8 +85,7 @@ func (h *Handler) UpdateUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	validate := validator.New()
-	if err := validate.Struct(&req); err != nil {
+	if err := h.V.Struct(&req); err != nil {
 		utils.RespondErr(w, http.StatusBadRequest, errors.New("request body validation error"))
 		return
 	}
@@ -140,8 +138,7 @@ func (h *Handler) UpdateUserPassword(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	validate := validator.New()
-	if err := validate.Struct(&req); err != nil {
+	if err := h.V.Struct(&req); err != nil {
 		utils.RespondErr(w, http.StatusBadRequest, errors.New("request body validation error"))
 		return
 	}
@@ -152,7 +149,7 @@ func (h *Handler) UpdateUserPassword(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := validate.Struct(&data); err != nil {
+	if err := h.V.Struct(&data); err != nil {
 		utils.RespondErr(w, http.StatusBadRequest, errors.New("invalid operation: user sign up using third party account"))
 		return
 	}

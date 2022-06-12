@@ -11,7 +11,6 @@ import (
 
 	"github.com/C22-PS350/backend-rawati/internal/models"
 	"github.com/C22-PS350/backend-rawati/internal/utils"
-	"github.com/go-playground/validator/v10"
 	"github.com/go-sql-driver/mysql"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
@@ -34,8 +33,7 @@ func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	validate := validator.New()
-	if err := validate.Struct(&req); err != nil {
+	if err := h.V.Struct(&req); err != nil {
 		utils.RespondErr(w, http.StatusBadRequest, errors.New("request body validation error"))
 		return
 	}

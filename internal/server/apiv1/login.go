@@ -8,7 +8,6 @@ import (
 
 	"github.com/C22-PS350/backend-rawati/internal/models"
 	"github.com/C22-PS350/backend-rawati/internal/utils"
-	"github.com/go-playground/validator/v10"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -38,8 +37,7 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	validate := validator.New()
-	if err := validate.Struct(&req); err != nil {
+	if err := h.V.Struct(&req); err != nil {
 		utils.RespondErr(w, http.StatusBadRequest, errors.New("request body validation error"))
 		return
 	}
@@ -50,7 +48,7 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := validate.Struct(&data); err != nil {
+	if err := h.V.Struct(&data); err != nil {
 		utils.RespondErr(w, http.StatusBadRequest, errors.New("invalid username, email or password"))
 		return
 	}

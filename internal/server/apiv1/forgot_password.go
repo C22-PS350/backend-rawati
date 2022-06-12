@@ -10,7 +10,6 @@ import (
 	"cloud.google.com/go/pubsub"
 	"github.com/C22-PS350/backend-rawati/internal/models"
 	"github.com/C22-PS350/backend-rawati/internal/utils"
-	"github.com/go-playground/validator/v10"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -39,8 +38,7 @@ func (h *Handler) ForgotPassword(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	validate := validator.New()
-	if err := validate.Struct(&req); err != nil {
+	if err := h.V.Struct(&req); err != nil {
 		utils.RespondErr(w, http.StatusBadRequest, errors.New("request body validation error"))
 		return
 	}
@@ -73,7 +71,7 @@ func (h *Handler) ForgotPassword(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	topic := h.GcpClient.PubSub.Topic("mailbox")
+	topic := h.GcpClients.PubSub.Topic("mailbox")
 	ok, err := topic.Exists(context.Background())
 	if err != nil {
 		utils.RespondErr(w, http.StatusInternalServerError, err)

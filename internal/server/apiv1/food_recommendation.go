@@ -10,7 +10,6 @@ import (
 
 	"github.com/C22-PS350/backend-rawati/internal/models"
 	"github.com/C22-PS350/backend-rawati/internal/utils"
-	"github.com/go-playground/validator/v10"
 )
 
 // @Summary      get food recommendation
@@ -30,8 +29,7 @@ func (h *Handler) CreateFoodRecommendation(w http.ResponseWriter, r *http.Reques
 		return
 	}
 
-	validate := validator.New()
-	if err := validate.Struct(&req); err != nil {
+	if err := h.V.Struct(&req); err != nil {
 		utils.RespondErr(w, http.StatusBadRequest, errors.New("request body validation error"))
 		return
 	}

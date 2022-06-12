@@ -49,7 +49,7 @@ func init() {
 			dbName = "rawati"
 		}
 
-		dbConnStr = "%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True"
+		dbConnStr = "%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Asia%2FJakarta"
 		dbConnStr = fmt.Sprintf(dbConnStr, dbUser, dbPass, dbHost, dbPort, dbName)
 		modelAPIUrl = "http://localhost:5000/predictions"
 
@@ -79,7 +79,7 @@ func init() {
 			panic("MODEL_API_URL env is not set")
 		}
 
-		dbConnStr = "%s:%s@unix(/cloudsql/%s)/%s?charset=utf8mb4&parseTime=True"
+		dbConnStr = "%s:%s@unix(/cloudsql/%s)/%s?charset=utf8mb4&parseTime=True&loc=Asia%2FJakarta"
 		dbConnStr = fmt.Sprintf(dbConnStr, dbUser, dbPass, instanceConnectionName, dbName)
 
 	default:

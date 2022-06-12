@@ -2,7 +2,6 @@ package apiv1
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"math"
 	"math/rand"

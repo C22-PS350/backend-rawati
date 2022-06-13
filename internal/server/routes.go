@@ -24,6 +24,9 @@ func setupRoutes(r *chi.Mux, h *apiv1.Handler) {
 			r.Put("/users/{user_id}/profile", h.UpdateUserProfile)
 			// r.Post("/users/{user_id}/profile", h.CreateUserProfile)
 
+			// activity
+			r.Get("/users/{user_id}/total-calories", h.GetTotalCaloriesPerDay)
+
 			// activiy (exercise)
 			r.Get("/users/{user_id}/exercises", h.GetAllExerciseActivity)
 			r.Get("/users/{user_id}/exercises/{exercise_id}", h.GetExerciseActivity)
